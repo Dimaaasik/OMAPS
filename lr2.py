@@ -17,22 +17,22 @@ mid = 1
 fin = 5
 
 def fun_bisect(left, right, fun, eps=1e-6):
-    iterations = 0
+
     if right == fin:
         arr = np.linspace(left, right, 100)
         fig, ax = plt.subplots()
         ax.plot(arr, y(arr))
         ax.axhline(0.0, color='red', linestyle='--')
         plt.show(block=None)
-    while iterations < 100:
-        iterations = iterations + 1
-        x = (left + right) / 2
-        if(fun(left) > 0 and fun(x) < 0) or (fun(left) < 0 and fun(x) > 0):
-            right = x
-        else:
-            left = x
-    print(x)
-    return x
+    x = (left + right) / 2
+
+    if fun(x) == 0 or abs(right - left) <= eps:
+        print(x)
+        return x
+    elif (fun(left) > 0 and fun(x) < 0) or (fun(left) < 0 and fun(x) > 0):
+        return fun_bisect(left, x, fun, eps)
+    else:
+        return fun_bisect(x, right, fun, eps)
 
 fun_bisect(min, fin, y)
 fun_bisect(mid, fin, y)
