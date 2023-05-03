@@ -1,5 +1,5 @@
 import numpy as np
-from scipy import linalg, optimize
+from scipy import  optimize
 import matplotlib.pyplot as plt
 
 x = np.linspace(0.01,5,100)
@@ -15,7 +15,7 @@ plt.show(block=None)
 min = 0.01
 fin = 5
 mid = (min+fin)/2
-def fun_bisect(left, right, fun, eps=0.0001, iteration = 0):
+def fun_bisect(left, right, fun, eps=0.01, iteration = 0):
     x = (left + right) / 2
     if(iteration > 150):
         return 'Функція не сходиться'
@@ -46,7 +46,7 @@ ax.axhline(0.0,color = 'black', linestyle = '--')
 plt.show(block=None)
 
 try:
-    np.testing.assert_array_almost_equal(fun_bisect(0.0, 3.0, func), optimize.root_scalar(func, bracket=[0.0, 3.0], method="bisect", maxiter=100).root, decimal=7 )
+    np.testing.assert_array_almost_equal(fun_bisect(0.5,2, func,0.000000000001), optimize.root_scalar(func, bracket=[0.5, 2], method="bisect", maxiter=100).root, decimal=7 )
 except AssertionError as E:
     print('zero not found')
 else:
