@@ -33,9 +33,7 @@ def fun_bisect(left, right, fun, eps=0.0001, iteration = 0):
         return fun_bisect(x, right, fun, eps, iteration)
 
 
-#fun_bisect(min, fin, y)
 fun_bisect(min, mid, y)
-# fun_bisect(mid, fin, y)
 
 def func(x):
     return x**2 - 1.0
